@@ -1,15 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TextField, Card, CardContent, CardActions, Button, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
+import { useTodoListForm } from '../../hooks/useTodoListForm'
 
 const TodoListForm = ({ todoList, saveTodoList }) => {
-  const [todos, setTodos] = useState(todoList.todos)
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    saveTodoList(todoList.id, { todos })
-  }
+  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo, handleSubmit } =
+    useTodoListForm(todoList, saveTodoList)
 
   return (
     <Card sx={{ margin: '0 1rem' }}>
@@ -28,39 +25,20 @@ const TodoListForm = ({ todoList, saveTodoList }) => {
                 sx={{ flexGrow: 1, marginTop: '1rem' }}
                 label='What to do?'
                 value={name}
-                onChange={(event) => {
-                  setTodos([
-                    // immutable update
-                    ...todos.slice(0, index),
-                    event.target.value,
-                    ...todos.slice(index + 1),
-                  ])
-                }}
+                onChange={(event) => handleNameChange(index, event.target.value)}
               />
               <Button
                 sx={{ margin: '8px' }}
                 size='small'
                 color='secondary'
-                onClick={() => {
-                  setTodos([
-                    // immutable delete
-                    ...todos.slice(0, index),
-                    ...todos.slice(index + 1),
-                  ])
-                }}
+                onClick={() => handleDeleteTodo(index)}
               >
                 <DeleteIcon />
               </Button>
             </div>
           ))}
           <CardActions>
-            <Button
-              type='button'
-              color='primary'
-              onClick={() => {
-                setTodos([...todos, ''])
-              }}
-            >
+            <Button type='button' color='primary' onClick={handleAddTodo}>
               Add Todo <AddIcon />
             </Button>
             <Button type='submit' variant='contained' color='primary'>
