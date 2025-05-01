@@ -1,19 +1,23 @@
-// Simulate network
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-
 export const fetchTodoLists = () => {
-  return sleep(1000).then(() =>
-    Promise.resolve({
-      '0000000001': {
-        id: '0000000001',
-        title: 'First List',
-        todos: ['First todo of first list!'],
-      },
-      '0000000002': {
-        id: '0000000002',
-        title: 'Second List',
-        todos: ['First todo of second list!'],
-      },
+  return fetch('/todos')
+    .then((response) => response.json())
+    .catch((err) => {
+      throw new Error(`Fetch lits failed with status ${err.status}`)
     })
-  )
+}
+
+export const updateTodoList = (updatedTodo, id) => {
+  return fetch(`/todos/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedTodo),
+  })
+    .then(async (response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      throw new Error(`Update list ${id} failed with status ${err.status}`)
+    })
 }
