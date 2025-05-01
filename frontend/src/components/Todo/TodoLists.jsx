@@ -18,7 +18,7 @@ const TodoLists = ({ style }) => {
   if (!Object.keys(todoLists).length) return null
   return (
     <Fragment>
-      <Card style={style}>
+      <Card sx={style}>
         <CardContent>
           <Typography component='h2'>My Todo Lists</Typography>
           <List>

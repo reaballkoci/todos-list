@@ -3,32 +3,30 @@ import { TextField, Card, CardContent, CardActions, Button, Typography } from '@
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import { useTodoListForm } from '../../hooks/useTodoListForm'
+import { styles } from '../../styles/styles'
 
 const TodoListForm = ({ todoList, saveTodoList }) => {
   const { todos, handleNameChange, handleDeleteTodo, handleAddTodo, handleSubmit } =
     useTodoListForm(todoList, saveTodoList)
 
   return (
-    <Card sx={{ margin: '0 1rem' }}>
+    <Card sx={styles.card}>
       <CardContent>
         <Typography component='h2'>{todoList.title}</Typography>
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-        >
+        <form onSubmit={handleSubmit} style={styles.form}>
           {todos.map((name, index) => (
-            <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography sx={{ margin: '8px' }} variant='h6'>
+            <div key={index} style={styles.todoItem}>
+              <Typography sx={styles.todoIndex} variant='h6'>
                 {index + 1}
               </Typography>
               <TextField
-                sx={{ flexGrow: 1, marginTop: '1rem' }}
+                sx={styles.textField}
                 label='What to do?'
                 value={name}
                 onChange={(event) => handleNameChange(index, event.target.value)}
               />
               <Button
-                sx={{ margin: '8px' }}
+                sx={styles.deleteButton}
                 size='small'
                 color='secondary'
                 onClick={() => handleDeleteTodo(index)}

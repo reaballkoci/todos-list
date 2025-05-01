@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
-export const Header = () => {
+const Header = () => {
   return (
     <AppBar position='static' color='primary'>
       <Toolbar>

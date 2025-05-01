@@ -1,20 +1,12 @@
 import Header from '../Header/Header'
+import { styles } from '../../styles/styles'
 
-const mainWrapperStyle = { display: 'flex', flexDirection: 'column' }
-const centerContentWrapper = { display: 'flex', justifyContent: 'center' }
-const contentWrapperStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  maxWidth: '80rem',
-  flexGrow: 1,
-}
-
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
-    <div style={mainWrapperStyle}>
+    <div style={styles.layout}>
       <Header />
-      <div style={centerContentWrapper}>
-        <div style={contentWrapperStyle}>{children}</div>
+      <div style={styles.centerContentLayout}>
+        <div style={styles.layoutElement}>{children}</div>
       </div>
     </div>
   )
