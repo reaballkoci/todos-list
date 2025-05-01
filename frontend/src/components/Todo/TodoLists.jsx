@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import ReceiptIcon from '@mui/icons-material/Receipt'
-import { TodoListForm } from './TodoListForm'
+import TodoListForm from '../../components/Todo/TodoListForm'
 
 // Simulate network
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -31,7 +31,7 @@ const fetchTodoLists = () => {
   )
 }
 
-export const TodoLists = ({ style }) => {
+const TodoLists = ({ style }) => {
   const [todoLists, setTodoLists] = useState({})
   const [activeList, setActiveList] = useState()
 
@@ -73,3 +73,5 @@ export const TodoLists = ({ style }) => {
     </Fragment>
   )
 }
+
+export default TodoLists
