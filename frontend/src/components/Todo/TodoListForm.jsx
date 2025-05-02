@@ -6,14 +6,17 @@ import { useTodoListForm } from '../../hooks/useTodoListForm'
 import { styles } from '../../styles/styles'
 
 const TodoListForm = ({ todoList, saveTodoList }) => {
-  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo, handleSubmit } =
-    useTodoListForm(todoList, saveTodoList)
+  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo } = useTodoListForm(
+    todoList.todos,
+    saveTodoList,
+    todoList.id
+  )
 
   return (
     <Card sx={styles.card}>
       <CardContent>
         <Typography component='h2'>{todoList.title}</Typography>
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form style={styles.form}>
           {todos.map((name, index) => (
             <div key={index} style={styles.todoItem}>
               <Typography sx={styles.todoIndex} variant='h6'>
@@ -38,9 +41,6 @@ const TodoListForm = ({ todoList, saveTodoList }) => {
           <CardActions>
             <Button type='button' color='primary' onClick={handleAddTodo}>
               Add Todo <AddIcon />
-            </Button>
-            <Button type='submit' variant='contained' color='primary'>
-              Save
             </Button>
           </CardActions>
         </form>
