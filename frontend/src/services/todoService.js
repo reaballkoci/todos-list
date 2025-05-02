@@ -1,8 +1,10 @@
 export const fetchTodoLists = () => {
-  return fetch('/todos')
+  return fetch('/todos', {
+    headers: { 'X-APP-KEY': process.env.REACT_APP_SECRET_KEY },
+  })
     .then((response) => response.json())
     .catch((err) => {
-      throw new Error(`Fetch lits failed with status ${err.status}`)
+      throw new Error(`Fetch lists failed with status ${err.status}`)
     })
 }
 
@@ -11,6 +13,7 @@ export const updateTodoList = (updatedTodo, id) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'X-APP-KEY': process.env.REACT_APP_SECRET_KEY,
     },
     body: JSON.stringify(updatedTodo),
   })
