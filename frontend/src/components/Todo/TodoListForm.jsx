@@ -1,31 +1,34 @@
 import React from 'react'
-import { TextField, Card, CardContent, CardActions, Button, Typography } from '@mui/material'
+import {
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  Checkbox,
+} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import { useTodoListForm } from '../../hooks/useTodoListForm'
 import { styles } from '../../styles/styles'
 
 const TodoListForm = ({ todoList, saveTodoList }) => {
-  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo } = useTodoListForm(
-    todoList.todos,
-    saveTodoList,
-    todoList.id
-  )
+  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo, handleCheckboxToggle } =
+    useTodoListForm(todoList.todos, saveTodoList, todoList.id)
 
   return (
     <Card sx={styles.card}>
       <CardContent>
         <Typography component='h2'>{todoList.title}</Typography>
         <form style={styles.form}>
-          {todos.map((name, index) => (
+          {todos.map((todo, index) => (
             <div key={index} style={styles.todoItem}>
-              <Typography sx={styles.todoIndex} variant='h6'>
-                {index + 1}
-              </Typography>
+              <Checkbox checked={todo.checked} onChange={() => handleCheckboxToggle(index)} />
               <TextField
                 sx={styles.textField}
                 label='What to do?'
-                value={name}
+                value={todo.name}
                 onChange={(event) => handleNameChange(index, event.target.value)}
               />
               <Button

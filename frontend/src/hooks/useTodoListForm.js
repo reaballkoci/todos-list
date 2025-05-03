@@ -17,7 +17,7 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   useEffect(() => {
     if (!debouncedSaveRef.current) return
 
-    const nonEmptyTodos = todos.filter((todo) => todo.trim() !== '')
+    const nonEmptyTodos = todos.filter((todo) => todo.name.trim() !== '')
     const hasChanged = JSON.stringify(nonEmptyTodos) !== JSON.stringify(previousTodosRef.current)
 
     if (hasChanged) {
@@ -27,7 +27,11 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }, [todos])
 
   const handleNameChange = (index, value) => {
-    setTodos([...todos.slice(0, index), value, ...todos.slice(index + 1)])
+    setTodos([
+      ...todos.slice(0, index),
+      { ...todos[index], name: value },
+      ...todos.slice(index + 1),
+    ])
   }
 
   const handleDeleteTodo = (index) => {
@@ -35,8 +39,24 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }
 
   const handleAddTodo = () => {
-    setTodos([...todos, ''])
+    setTodos([...todos, { name: '', checked: false }])
   }
 
-  return { todos, setTodos, handleNameChange, handleDeleteTodo, handleAddTodo }
+  const handleCheckboxToggle = (index) => {
+    const updated = deepCopy(todos)
+    updated[index].checked = !updated[index].checked
+    setTodos(updated)
+  }
+
+  return {
+    todos,
+    handleCheckboxToggle,
+    handleNameChange,
+    handleDeleteTodo,
+    handleAddTodo,
+  }
+}
+
+const deepCopy = (object) => {
+  return JSON.parse(JSON.stringify(object))
 }

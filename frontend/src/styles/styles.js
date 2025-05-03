@@ -15,10 +15,6 @@ export const styles = {
     marginBottom: '1rem',
   },
 
-  todoIndex: {
-    margin: '8px',
-  },
-
   textField: {
     flexGrow: 1,
     marginTop: '1rem',
