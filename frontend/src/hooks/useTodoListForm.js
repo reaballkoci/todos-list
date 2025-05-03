@@ -59,7 +59,7 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
     updatedErrors[index] = !isValid
     setErrors(updatedErrors)
 
-    return validateInput
+    return isValid
   }
 
   return {
