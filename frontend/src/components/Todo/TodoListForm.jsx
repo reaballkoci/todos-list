@@ -14,7 +14,7 @@ import { useTodoListForm } from '../../hooks/useTodoListForm'
 import { styles } from '../../styles/styles'
 
 const TodoListForm = ({ todoList, saveTodoList }) => {
-  const { todos, handleNameChange, handleDeleteTodo, handleAddTodo, handleCheckboxToggle } =
+  const { todos, errors, handleNameChange, handleDeleteTodo, handleAddTodo, handleCheckboxToggle } =
     useTodoListForm(todoList.todos, saveTodoList, todoList.id)
 
   return (
@@ -30,6 +30,8 @@ const TodoListForm = ({ todoList, saveTodoList }) => {
                 label='What to do?'
                 value={todo.name}
                 onChange={(event) => handleNameChange(index, event.target.value)}
+                error={errors[index]}
+                helperText={errors[index] ? 'Only letters and numbers allowed' : ''}
               />
               <Button
                 sx={styles.deleteButton}

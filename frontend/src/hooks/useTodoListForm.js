@@ -5,6 +5,7 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   const [todos, setTodos] = useState(initialTodos)
   const debouncedSaveRef = useRef()
   const previousTodosRef = useRef(initialTodos)
+  const [errors, setErrors] = useState(Array(initialTodos.length).fill(false))
 
   useEffect(() => {
     debouncedSaveRef.current = debounce((updatedTodos) => {
@@ -27,6 +28,9 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }, [todos])
 
   const handleNameChange = (index, value) => {
+    const isValid = validateInput(index, value)
+    if (!isValid) return
+
     setTodos([
       ...todos.slice(0, index),
       { ...todos[index], name: value },
@@ -48,8 +52,19 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
     setTodos(updated)
   }
 
+  const validateInput = (index, value) => {
+    const isValid = /^[a-zA-Z0-9 .,!?'":;()-]*$/.test(value)
+
+    const updatedErrors = [...errors]
+    updatedErrors[index] = !isValid
+    setErrors(updatedErrors)
+
+    return validateInput
+  }
+
   return {
     todos,
+    errors,
     handleCheckboxToggle,
     handleNameChange,
     handleDeleteTodo,
