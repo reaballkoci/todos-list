@@ -9,11 +9,12 @@ import {
   Typography,
 } from '@mui/material'
 import ReceiptIcon from '@mui/icons-material/Receipt'
+import { CheckCircle, Pending } from '@mui/icons-material'
 import TodoListForm from '../../components/Todo/TodoListForm'
 import { useTodoLists } from '../../hooks/useTodoLists'
 
 const TodoLists = ({ style }) => {
-  const { todoLists, activeList, setActiveList, saveTodoList } = useTodoLists()
+  const { todoLists, activeList, setActiveList, saveTodoList, isListCompleted } = useTodoLists()
 
   if (!Object.keys(todoLists).length) return null
   return (
@@ -28,6 +29,11 @@ const TodoLists = ({ style }) => {
                   <ReceiptIcon />
                 </ListItemIcon>
                 <ListItemText primary={todoLists[key].title} />
+                {isListCompleted(todoLists[key].todos) ? (
+                  <CheckCircle sx={{ color: 'green' }} />
+                ) : (
+                  <Pending sx={{ color: 'grey' }} />
+                )}
               </ListItemButton>
             ))}
           </List>

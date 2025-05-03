@@ -18,5 +18,9 @@ export const useTodoLists = () => {
     }))
   }
 
-  return { todoLists, activeList, setActiveList, setTodoLists, saveTodoList }
+  const isListCompleted = (todoList) => {
+    return todoList.every((item) => item.checked === true)
+  }
+
+  return { todoLists, activeList, setActiveList, setTodoLists, saveTodoList, isListCompleted }
 }
