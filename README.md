@@ -1,12 +1,11 @@
 # Sellpy web interview
 
-Welcome to Sellpy's web interview repo!
+This is a forked repository that provides a solution for Sellpy's web interview
 ## Prerequisites
 
 NodeJS - if you don't already have it installed, check out [nvm](https://github.com/nvm-sh/nvm).
 
 ## Getting started
-Fork the repository (see top-right button on GitHub) and clone the fork to your computer.
 ### To start the backend:
 
  - Navigate to the backend folder
@@ -39,15 +38,13 @@ If you feel constrained by time (which is totally fine!), prioritize quality ove
 ### Main Task
 Persist the todo lists on the server. Persisting in a database is not required. (Simple js structures on the server is fine). If you do go for an actual DB (again not required), be sure to include instructions of how to get it up and running.
 
+✓ Solution: persisted information in a .json file stored under backend/src/utils
+
 ### Additional tasks
-- Don't require users to press save when an item is added/edited in the todo list. (Autosave functionality)
-- Make it possible to indicate that a todo is completed.
-- Indicate that a todo list is completed if all todo items within are completed.
-- Add a date for completion to todo items. Indicate how much time is remaining or overdue.
+✓ Don't require users to press save when an item is added/edited in the todo list. (Autosave functionality)
 
-## Submission
-Before submitting, read through all changes one last time - code quality matters!
+✓ Make it possible to indicate that a todo is completed.
 
-If you have developed without ESLint set up, run `npm run lint` in both `/backend` and `/frontend` and fix any errors/warnings.
+✓ Indicate that a todo list is completed if all todo items within are completed.
 
-Send a link to your forked repository to your contact at Sellpy. Don't forget to mention which tasks you completed.
+✗ Add a date for completion to todo items. Indicate how much time is remaining or overdue.
