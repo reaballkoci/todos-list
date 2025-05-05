@@ -1,0 +1,17 @@
+{
+  "0000000001": {
+    "id": "0000000001",
+    "title": "House chores",
+    "todos": [
+      {
+        "name": "Buy groceries!!!",
+        "checked": true
+      }
+    ]
+  },
+  "0000000002": {
+    "id": "0000000002",
+    "title": "University work",
+    "todos": []
+  }
+}
