@@ -25,11 +25,17 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }
 
   const handleDeleteTodo = (index) => {
-    setTodos([...todos.slice(0, index), ...todos.slice(index + 1)])
+    const updatedTodos = [...todos.slice(0, index), ...todos.slice(index + 1)]
+
+    debouncedSaveRef.current(updatedTodos)
+    setTodos(updatedTodos)
   }
 
   const handleAddTodo = () => {
-    setTodos([...todos, { name: '', done: false }])
+    const updatedTodos = [...todos, { name: '', done: false }]
+
+    debouncedSaveRef.current(updatedTodos)
+    setTodos(updatedTodos)
   }
 
   const handleCheckboxToggle = (index) => {
