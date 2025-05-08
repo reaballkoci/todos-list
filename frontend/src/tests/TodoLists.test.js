@@ -18,8 +18,8 @@ describe('TodoLists', () => {
   const mockIsListCompleted = jest.fn()
 
   const mockTodoLists = {
-    'list-1': { title: 'Groceries', todos: [{ name: 'Apples', checked: true }] },
-    'list-2': { title: 'Work', todos: [{ name: 'Emails', checked: false }] },
+    'list-1': { title: 'Groceries', todos: [{ name: 'Apples', done: true }] },
+    'list-2': { title: 'Work', todos: [{ name: 'Emails', done: false }] },
   }
 
   beforeEach(() => {
@@ -72,7 +72,7 @@ describe('TodoLists', () => {
   })
 
   it('shows correct icon for completed and pending lists', () => {
-    mockIsListCompleted.mockImplementation((todos) => todos[0].checked)
+    mockIsListCompleted.mockImplementation((todos) => todos[0].done)
 
     useTodoLists.mockReturnValue({
       todoLists: mockTodoLists,

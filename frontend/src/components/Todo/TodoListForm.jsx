@@ -24,7 +24,7 @@ const TodoListForm = ({ todoList, saveTodoList }) => {
         <form style={styles.form}>
           {todos.map((todo, index) => (
             <div key={index} style={styles.todoItem}>
-              <Checkbox checked={todo.checked} onChange={() => handleCheckboxToggle(index)} />
+              <Checkbox checked={todo.done} onChange={() => handleCheckboxToggle(index)} />
               <TextField
                 sx={styles.textField}
                 label='What to do?'

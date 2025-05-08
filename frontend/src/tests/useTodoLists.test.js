@@ -6,8 +6,8 @@ jest.mock('../services/todoService')
 
 describe('useTodoLists', () => {
   const mockTodos = {
-    1: { id: 1, todos: [{ id: 'a', checked: false }] },
-    2: { id: 2, todos: [{ id: 'b', checked: true }] },
+    1: { id: 1, todos: [{ id: 'a', done: false }] },
+    2: { id: 2, todos: [{ id: 'b', done: true }] },
   }
 
   beforeEach(() => {
@@ -25,10 +25,10 @@ describe('useTodoLists', () => {
   })
 
   it('updates todo list using saveTodoList', async () => {
-    const updatedList = { id: 1, todos: [{ id: 'a', checked: true }] }
+    const updatedList = { id: 1, todos: [{ id: 'a', done: true }] }
 
     todoService.fetchTodoLists.mockResolvedValue({
-      1: { id: 1, todos: [{ id: 'a', checked: false }] },
+      1: { id: 1, todos: [{ id: 'a', done: false }] },
     })
     todoService.updateTodoList.mockResolvedValue(updatedList)
 

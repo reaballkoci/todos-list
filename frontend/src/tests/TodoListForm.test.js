@@ -13,8 +13,8 @@ const mockHandleAddTodo = jest.fn()
 const mockHandleCheckboxToggle = jest.fn()
 
 const mockTodos = [
-  { name: 'Buy eggs', checked: false },
-  { name: 'Walk dog', checked: true },
+  { name: 'Buy eggs', done: false },
+  { name: 'Walk dog', done: true },
 ]
 
 const mockErrors = [false, false]

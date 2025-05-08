@@ -33,7 +33,7 @@ describe('fetchTodoLists', () => {
 
 describe('updateTodoList', () => {
   it('calls correct endpoint and sends data', async () => {
-    const updatedTodo = { todos: [{ name: 'Do test', checked: false }] }
+    const updatedTodo = { todos: [{ name: 'Do test', done: false }] }
     const id = ID
     const mockResponse = { id, ...updatedTodo }
 

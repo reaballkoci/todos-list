@@ -13,7 +13,7 @@ jest.unstable_mockModule('../utils/db.js', () => ({
 const { getTodos, updateTodo } = await import('../controllers/todosController.js')
 
 //Create mock for a todo list
-const mockTodoList = { list1: { title: 'Test', todos: [{ name: 'Write test', checked: true }] } }
+const mockTodoList = { list1: { title: 'Test', todos: [{ name: 'Write test', done: true }] } }
 
 beforeEach(() => {
   readTodos.mockReset()

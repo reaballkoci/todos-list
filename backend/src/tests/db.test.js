@@ -5,7 +5,7 @@ const readFile = jest.fn()
 const writeFile = jest.fn()
 
 //Create mock for a todo list
-const mockTodoList = { list1: { title: 'Test', todos: [{ name: 'Write test', checked: true }] } }
+const mockTodoList = { list1: { title: 'Test', todos: [{ name: 'Write test', done: true }] } }
 
 // Mock the fs/promises module before importing db.js
 jest.unstable_mockModule('fs/promises', () => ({

@@ -5,8 +5,8 @@ jest.useFakeTimers()
 
 describe('useTodoListForm', () => {
   const initialTodos = [
-    { name: 'Buy milk', checked: false },
-    { name: 'Write tests', checked: true },
+    { name: 'Buy milk', done: false },
+    { name: 'Write tests', done: true },
   ]
 
   const id = 'list-1'
@@ -32,7 +32,7 @@ describe('useTodoListForm', () => {
     })
 
     expect(result.current.todos.length).toBe(3)
-    expect(result.current.todos[2]).toEqual({ name: '', checked: false })
+    expect(result.current.todos[2]).toEqual({ name: '', done: false })
   })
 
   it('should delete a todo by index', () => {
@@ -75,7 +75,7 @@ describe('useTodoListForm', () => {
       result.current.handleCheckboxToggle(0)
     })
 
-    expect(result.current.todos[0].checked).toBe(true)
+    expect(result.current.todos[0].done).toBe(true)
   })
 
   it('should debounce save when todos change', () => {
@@ -94,8 +94,8 @@ describe('useTodoListForm', () => {
     expect(saveTodoListMock).toHaveBeenCalledWith(
       {
         todos: [
-          { name: 'New name', checked: false },
-          { name: 'Write tests', checked: true },
+          { name: 'New name', done: false },
+          { name: 'Write tests', done: true },
         ],
       },
       id

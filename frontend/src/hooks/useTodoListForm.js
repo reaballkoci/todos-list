@@ -29,13 +29,13 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }
 
   const handleAddTodo = () => {
-    setTodos([...todos, { name: '', checked: false }])
+    setTodos([...todos, { name: '', done: false }])
   }
 
   const handleCheckboxToggle = (index) => {
     const updatedTodos = [
       ...todos.slice(0, index),
-      { ...todos[index], checked: !todos[index].checked },
+      { ...todos[index], done: !todos[index].done },
       ...todos.slice(index + 1),
     ]
 
