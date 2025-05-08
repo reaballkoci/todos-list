@@ -1,41 +1,27 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
 
 export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   const [todos, setTodos] = useState(initialTodos)
-  const debouncedSaveRef = useRef()
-  const previousTodosRef = useRef(initialTodos)
-  const [errors, setErrors] = useState(Array(initialTodos.length).fill(false))
-
-  useEffect(() => {
-    debouncedSaveRef.current = debounce((updatedTodos) => {
+  const debouncedSaveRef = useRef(
+    debounce((updatedTodos) => {
       saveTodoList({ todos: updatedTodos }, todoListId)
     }, 1000)
-
-    return () => debouncedSaveRef.current.cancel()
-  }, [saveTodoList, todoListId])
-
-  useEffect(() => {
-    if (!debouncedSaveRef.current) return
-
-    const nonEmptyTodos = todos.filter((todo) => todo.name.trim() !== '')
-    const hasChanged = JSON.stringify(nonEmptyTodos) !== JSON.stringify(previousTodosRef.current)
-
-    if (hasChanged) {
-      debouncedSaveRef.current(nonEmptyTodos)
-      previousTodosRef.current = nonEmptyTodos
-    }
-  }, [todos])
+  )
+  const [errors, setErrors] = useState(Array(initialTodos.length).fill(false))
 
   const handleNameChange = (index, value) => {
     const isValid = validateInput(index, value)
     if (!isValid) return
 
-    setTodos([
+    const updatedTodos = [
       ...todos.slice(0, index),
       { ...todos[index], name: value },
       ...todos.slice(index + 1),
-    ])
+    ]
+
+    debouncedSaveRef.current(updatedTodos)
+    setTodos(updatedTodos)
   }
 
   const handleDeleteTodo = (index) => {
