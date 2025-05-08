@@ -33,9 +33,14 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
   }
 
   const handleCheckboxToggle = (index) => {
-    const updated = deepCopy(todos)
-    updated[index].checked = !updated[index].checked
-    setTodos(updated)
+    const updatedTodos = [
+      ...todos.slice(0, index),
+      { ...todos[index], checked: !todos[index].checked },
+      ...todos.slice(index + 1),
+    ]
+
+    debouncedSaveRef.current(updatedTodos)
+    setTodos(updatedTodos)
   }
 
   const validateInput = (index, value) => {
@@ -56,8 +61,4 @@ export const useTodoListForm = (initialTodos, saveTodoList, todoListId) => {
     handleDeleteTodo,
     handleAddTodo,
   }
-}
-
-const deepCopy = (object) => {
-  return JSON.parse(JSON.stringify(object))
 }
