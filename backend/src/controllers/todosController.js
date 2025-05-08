@@ -13,15 +13,15 @@ export const updateTodo = async (req, res, next) => {
   try {
     const { id } = req.params
     const { todos: todosArray } = req.body
-    const allTodos = await readTodos()
+    const todoLists = await readTodos()
 
-    if (!allTodos[id]) return res.status(404).json({ error: 'Todo not found' })
+    if (!todoLists[id]) return res.status(404).json({ error: 'Todo not found' })
 
-    if (todosArray) allTodos[id].todos = todosArray
+    if (todosArray) todoLists[id].todos = todosArray
 
-    await writeTodos(allTodos)
+    await writeTodos(todoLists)
 
-    res.json(allTodos[id])
+    res.json(todoLists[id])
   } catch (err) {
     next(err)
   }
