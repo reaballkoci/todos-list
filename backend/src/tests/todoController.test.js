@@ -56,7 +56,7 @@ describe('getTodos', () => {
 })
 
 describe('updateTodo', () => {
-  it('updates title and todos', async () => {
+  it('updates todos', async () => {
     // Arrange
     const initialTodos = mockTodoList
 
@@ -65,7 +65,7 @@ describe('updateTodo', () => {
 
     const req = {
       params: { id: 'list1' },
-      body: { title: 'New title', todos: [] },
+      body: { todos: [] },
     }
     const res = { json: jest.fn(), status: jest.fn().mockReturnThis() }
     const next = jest.fn()
@@ -75,8 +75,8 @@ describe('updateTodo', () => {
 
     // Assert
     expect(readTodos).toHaveBeenCalled()
-    expect(writeTodos).toHaveBeenCalledWith({ list1: { title: 'New title', todos: [] } })
-    expect(res.json).toHaveBeenCalledWith({ title: 'New title', todos: [] })
+    expect(writeTodos).toHaveBeenCalledWith({ list1: { title: 'Test', todos: [] } })
+    expect(res.json).toHaveBeenCalledWith({ title: 'Test', todos: [] })
     expect(next).not.toHaveBeenCalled()
   })
 

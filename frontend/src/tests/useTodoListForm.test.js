@@ -15,6 +15,7 @@ describe('useTodoListForm', () => {
 
   beforeEach(() => {
     saveTodoListMock.mockClear()
+    jest.clearAllTimers()
   })
 
   it('should initialize with given todos and no errors', () => {
@@ -85,9 +86,12 @@ describe('useTodoListForm', () => {
       result.current.handleNameChange(0, 'New name')
     })
 
-    // Fast-forward time for debounce
+    // Not yet called immediately
+    expect(saveTodoListMock).not.toHaveBeenCalled()
+
+    // Fast-forward exactly 1 second to trigger debounce
     act(() => {
-      jest.runAllTimers()
+      jest.advanceTimersByTime(1000)
     })
 
     expect(saveTodoListMock).toHaveBeenCalledTimes(1)
